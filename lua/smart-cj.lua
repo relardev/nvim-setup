@@ -13,10 +13,7 @@ local function qf(operation)
 		return false
 	end
 	local ok, _ = pcall(vim.cmd, operation)
-	if ok then
-		vim.cmd("normal zz")
-	end
-	return true
+	return ok
 end
 
 local function next_qf()
@@ -33,7 +30,6 @@ local function diag(move_func)
 		return false
 	end
 	move_func()
-	vim.cmd("normal zz")
 	return true
 end
 
@@ -53,7 +49,6 @@ local function next_hunk()
 	vim.schedule(function()
 		gs.next_hunk()
 	end)
-	vim.cmd("normal zz")
 end
 
 local function prev_hunk()
@@ -64,13 +59,13 @@ local function prev_hunk()
 	vim.schedule(function()
 		gs.prev_hunk()
 	end)
-	vim.cmd("normal zz")
 end
 
 vim.keymap.set("n", "<C-j>", function()
 	local funcs = { next_qf, next_diag, next_hunk }
 	for _, func in pairs(funcs) do
 		if func() then
+			vim.cmd("normal zz")
 			return
 		end
 	end
@@ -80,6 +75,7 @@ vim.keymap.set("n", "<C-k>", function()
 	local funcs = { prev_qf, prev_diag, prev_hunk }
 	for _, func in pairs(funcs) do
 		if func() then
+			vim.cmd("normal zz")
 			return
 		end
 	end
