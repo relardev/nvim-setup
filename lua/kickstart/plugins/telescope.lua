@@ -84,6 +84,7 @@ return {
 			vim.keymap.set("n", "<leader>p.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			vim.keymap.set("n", "<leader>pe", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+			vim.keymap.set("n", "td", builtin.diagnostics, { desc = "show diagnostics" })
 
 			vim.keymap.set("n", "<leader>pn", function()
 				local ok, _ = pcall(builtin.git_files)

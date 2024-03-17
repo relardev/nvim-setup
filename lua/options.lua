@@ -27,6 +27,8 @@ vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
+vim.opt.swapfile = false
+
 -- Case-insensitive searching UNLESS \C or capital in search
 -- vim.opt.ignorecase = true
 -- vim.opt.smartcase = true
@@ -48,8 +50,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -59,5 +61,10 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 4
+
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 0
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = false
 
 -- vim: ts=2 sts=2 sw=2 et
