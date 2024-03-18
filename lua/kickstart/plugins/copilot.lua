@@ -9,9 +9,9 @@ return {
 				auto_trigger = true,
 				debounce = 40,
 				keymap = {
-					accept = "<c-n>",
-					accept_word = "<c-i>",
-					accept_line = "<c-e>",
+					accept = "<c-e>",
+					accept_word = "<c-,>",
+					accept_line = "<c-.>",
 				},
 			},
 			filetypes = {
