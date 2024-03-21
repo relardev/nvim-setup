@@ -128,5 +128,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		end
 	end,
 })
+vim.api.nvim_set_keymap("n", "<c-e>", "<Nop>", { noremap = true, silent = true })
 
 -- vim: ts=2 sts=2 sw=2 et
