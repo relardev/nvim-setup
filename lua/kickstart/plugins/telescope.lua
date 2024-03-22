@@ -52,15 +52,28 @@ return {
 
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
+			--
+			local actions = require("telescope.actions")
+			local transform_mod = require("telescope.actions.mt").transform_mod
+			local mod = {}
+			mod.open_first_qf = function(_)
+				vim.cmd([[cfirst]])
+			end
+			mod = transform_mod(mod)
+
+			local smart_send_to_qf = actions.smart_send_to_qflist + mod.open_first_qf
+
 			require("telescope").setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
+				defaults = {
+					mappings = {
+						i = {
+							["<c-q>"] = smart_send_to_qf,
+						},
+					},
+				},
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
