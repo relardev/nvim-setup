@@ -10,8 +10,8 @@ return {
 				debounce = 40,
 				keymap = {
 					accept = "<c-e>",
-					accept_word = "<c-,>",
-					accept_line = "<c-.>",
+					accept_word = "<c-^>",
+					accept_line = "<c-_>",
 				},
 			},
 			filetypes = {
