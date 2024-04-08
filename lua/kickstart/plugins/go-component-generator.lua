@@ -1,18 +1,19 @@
-return {
-	dir = "~/workspace/go-component-generator.nvim/",
-	opts = {},
-	keys = {
-		{ "<leader>n", ":GoImplement<CR>", mode = "v" },
-		{ "<leader>n", ":GoImplementPaste<CR>", mode = "n" },
-	},
-	cmd = {
-		"GoImplement",
-		"GoImplementPaste",
-	},
-	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-	},
-}
+return {}
+-- return {
+-- 	dir = "~/workspace/go-component-generator.nvim/",
+-- 	opts = {},
+-- 	keys = {
+-- 		{ "<leader>n", ":GoImplement<CR>", mode = "v" },
+-- 		{ "<leader>n", ":GoImplementPaste<CR>", mode = "n" },
+-- 	},
+-- 	cmd = {
+-- 		"GoImplement",
+-- 		"GoImplementPaste",
+-- 	},
+-- 	dependencies = {
+-- 		{ "nvim-lua/plenary.nvim" },
+-- 	},
+-- }
 --
 -- return {
 -- 	"relardev/go-component-generator.nvim",
