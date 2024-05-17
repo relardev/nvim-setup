@@ -11,7 +11,7 @@ return {
 		"DBUIFindBuffer",
 	},
 	keys = {
-		{ "<leader>td", "<cmd>DBUIToggle<cr>" },
+		{ "<leader>td", ":tabnew<cr><cmd>DBUIToggle<cr>" },
 	},
 
 	init = function()
