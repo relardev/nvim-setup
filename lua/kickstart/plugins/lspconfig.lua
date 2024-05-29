@@ -137,6 +137,12 @@ return {
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+			local config_dir = os.getenv("NVIM_APPNAME")
+			if config_dir == nil then
+				config_dir = "nvim"
+			end
+
 			local servers = {
 				-- clangd = {},
 				gopls = {
@@ -147,7 +153,7 @@ return {
 					},
 				},
 				-- pyright = {},
-				-- rust_analyzer = {},
+				rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -173,8 +179,8 @@ return {
 				},
 
 				lexical = {
-					cmd = { "/home/user/.local/share/" .. os.getenv("NVIM_APPNAME") .. "/mason/bin/lexical", "server" },
-					root_dir = require("lspconfig.util").root_pattern({ "mix.exs" }),
+					cmd = { "/home/user/.local/share/" .. config_dir .. "/mason/bin/lexical", "server" },
+					root_dir = require("lspconfig.util").root_pattern({ ".git" }),
 				},
 			}
 

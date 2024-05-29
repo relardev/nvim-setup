@@ -9,4 +9,4 @@
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
-require("lazy").setup("kickstart/plugins", {})
+require("lazy").setup("kickstart/plugins", { change_detection = { enabled = false } })
