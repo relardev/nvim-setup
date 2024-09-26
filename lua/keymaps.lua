@@ -72,6 +72,25 @@ vim.keymap.set("n", "<leader>fj", ":%!fixjson --indent 2<cr>")
 vim.keymap.set("v", "<leader>fn", ":s/\\\\n/\\r/g<cr>")
 vim.keymap.set("n", "<leader>fn", ":%s/\\\\n/\\r/g<cr>")
 
+local json_to_paths_format_command =
+	[[jq -r 'paths(scalars) as $p | "\($p | join(".")): \((getpath($p) | tostring))"' | awk '{gsub(/\[[0-9]+\]\./, "."); print}']]
+
+-- Normal mode mapping (whole buffer)
+vim.keymap.set(
+	"n",
+	"<leader>fp",
+	string.format(":%%!%s<CR>", json_to_paths_format_command),
+	{ noremap = true, silent = true }
+)
+
+-- Visual mode mapping (selected text only)
+vim.keymap.set(
+	"v",
+	"<leader>fp",
+	string.format(":!%s<CR>", json_to_paths_format_command),
+	{ noremap = true, silent = true }
+)
+
 vim.keymap.set("n", "<leader>j", ":cnext<cr>")
 vim.keymap.set("n", "<leader>k", ":cprev<cr>")
 
