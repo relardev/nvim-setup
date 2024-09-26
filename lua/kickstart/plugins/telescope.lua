@@ -94,13 +94,16 @@ return {
 			vim.keymap.set("n", "<leader>pw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>pr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>pg", builtin.git_status, { desc = "[S]earch [R]esume" })
+			vim.keymap.set("n", "<leader>pj", builtin.git_bcommits, { desc = "Buffer Commits" })
+			vim.keymap.set("n", "<leader>pb", builtin.git_branches, { desc = "Git Branches" })
 			vim.keymap.set("n", "<leader>p.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			vim.keymap.set("n", "<leader>pe", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+			vim.keymap.set("n", "<leader>pc", builtin.command_history, { desc = "Command history" })
 			vim.keymap.set("n", "td", builtin.diagnostics, { desc = "show diagnostics" })
 
 			vim.keymap.set("n", "<leader>pn", function()
-				local ok, _ = pcall(builtin.git_files)
+				local ok, _ = pcall(builtin.git_files, { show_untracked = true })
 				if not ok then
 					builtin.find_files()
 				end

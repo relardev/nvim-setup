@@ -178,10 +178,7 @@ return {
 					},
 				},
 
-				lexical = {
-					cmd = { "/home/user/.local/share/" .. config_dir .. "/mason/bin/lexical", "server" },
-					root_dir = require("lspconfig.util").root_pattern({ ".git" }),
-				},
+				elixirls = {},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -213,6 +210,8 @@ return {
 					end,
 				},
 			})
+
+			-- require("lspconfig").gleam.setup({})
 		end,
 	},
 }

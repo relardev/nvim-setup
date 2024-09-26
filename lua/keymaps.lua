@@ -48,7 +48,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
+vim.keymap.set("n", "q:", ":q<CR>")
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
+vim.keymap.set("n", "<leader>qw", ":wq<CR>")
 vim.keymap.set("n", "<leader>Q", ":q!<CR>")
 
 vim.keymap.set("n", "n", "nzz")
@@ -66,6 +68,9 @@ vim.keymap.set("n", "<leader>dj", ":%!jq .<cr>")
 
 vim.keymap.set("v", "<leader>fj", ":!fixjson --indent 2<cr>")
 vim.keymap.set("n", "<leader>fj", ":%!fixjson --indent 2<cr>")
+
+vim.keymap.set("v", "<leader>fn", ":s/\\\\n/\\r/g<cr>")
+vim.keymap.set("n", "<leader>fn", ":%s/\\\\n/\\r/g<cr>")
 
 vim.keymap.set("n", "<leader>j", ":cnext<cr>")
 vim.keymap.set("n", "<leader>k", ":cprev<cr>")
