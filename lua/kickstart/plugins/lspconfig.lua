@@ -144,11 +144,13 @@ return {
 			end
 
 			local servers = {
-				-- clangd = {},
+				clangd = {},
+				asm_lsp = {},
 				gopls = {
 					settings = {
 						gopls = {
 							gofumpt = true,
+							buildFlags = { "-tags=profiling" },
 						},
 					},
 				},
@@ -179,6 +181,15 @@ return {
 				},
 
 				elixirls = {},
+				ols = {
+					init_options = {
+						checker_args = "-strict-style",
+						enable_snippets = true,
+						collections = {
+							{ name = "shared", path = vim.fn.expand("$HOME/odin-lib") },
+						},
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -192,6 +203,12 @@ return {
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
+
+			-- remove ols from ensure_installed
+			ensure_installed = vim.tbl_filter(function(v)
+				return v ~= "ols"
+			end, ensure_installed)
+
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
 			})
@@ -211,7 +228,7 @@ return {
 				},
 			})
 
-			-- require("lspconfig").gleam.setup({})
+			require("lspconfig").ols.setup({})
 		end,
 	},
 }

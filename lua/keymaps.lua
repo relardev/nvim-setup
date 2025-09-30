@@ -69,6 +69,9 @@ vim.keymap.set("n", "<leader>dj", ":%!jq .<cr>")
 vim.keymap.set("v", "<leader>fj", ":!fixjson --indent 2<cr>")
 vim.keymap.set("n", "<leader>fj", ":%!fixjson --indent 2<cr>")
 
+vim.keymap.set("v", "<leader>fJ", ":!fixjson | jf<cr>")
+vim.keymap.set("n", "<leader>fJ", ":%!fixjson | jf<cr>")
+
 vim.keymap.set("v", "<leader>fn", ":s/\\\\n/\\r/g<cr>")
 vim.keymap.set("n", "<leader>fn", ":%s/\\\\n/\\r/g<cr>")
 
@@ -154,4 +157,58 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 vim.api.nvim_set_keymap("n", "<c-e>", "<Nop>", { noremap = true, silent = true })
 
+-- Copy the current buffer's file path to the system clipboard
+vim.keymap.set("n", "<leader>lp", function()
+	-- Get the full path of the current buffer
+	local path = vim.fn.expand("%:p")
+	-- Copy the path to the system clipboard
+	vim.fn.setreg("+", path)
+	-- Optional: Notify the user
+	vim.notify("Copied path: " .. path, vim.log.levels.INFO)
+end, { desc = "Copy current buffer file path" })
+
+-- Map a key to copy the current buffer's file path and line number to the clipboard
+vim.keymap.set("n", "<leader>ll", function()
+	-- Get the full path of the current buffer
+	local path = vim.fn.expand("%:p")
+	-- Get the current line number
+	local line = vim.fn.line(".")
+	-- Combine path and line number
+	local file_line = path .. ":" .. line
+	-- Copy to the system clipboard
+	vim.fn.setreg("+", file_line)
+	-- Optional: Notify the user
+	vim.notify("Copied: " .. file_line, vim.log.levels.INFO)
+end, { desc = "Copy current buffer file path with line number" })
+
+vim.keymap.set("n", "<leader>or", function()
+	local cmd = { "./build_hot_reload.sh" }
+	local output = {}
+	local notify = vim.notify or print
+	vim.fn.jobstart(cmd, {
+		on_stdout = function(_, data)
+			if data then
+				for _, line in ipairs(data) do
+					table.insert(output, line)
+				end
+			end
+		end,
+		on_stderr = function(_, data)
+			if data then
+				for _, line in ipairs(data) do
+					table.insert(output, line)
+				end
+			end
+		end,
+		on_exit = function(_, code, _)
+			if code == 0 then
+				notify("Hot reload build succeeded ✅", vim.log.levels.INFO)
+			else
+				notify("Hot reload build failed ❌\n" .. table.concat(output, "\n"), vim.log.levels.ERROR)
+			end
+		end,
+		stdout_buffered = true,
+		stderr_buffered = true,
+	})
+end, { desc = "Run hot reload build script" })
 -- vim: ts=2 sts=2 sw=2 et

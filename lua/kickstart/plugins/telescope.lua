@@ -120,6 +120,24 @@ return {
 				})
 			end)
 
+			local function help_file_directories()
+				local function doc_subdir(path)
+					return path .. "/doc"
+				end
+				return vim.iter(vim.opt.runtimepath:get()):map(doc_subdir):filter(vim.fn.isdirectory):totable()
+			end
+
+			local function telescope_help_grep()
+				builtin.grep_string({
+					prompt_title = "Helpgrep",
+					path_display = { "smart" },
+					search = "",
+					search_dirs = help_file_directories(),
+				})
+			end
+
+			vim.keymap.set("n", "<leader>p,", telescope_help_grep, { desc = "[S]earch [H]elp" })
+
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
